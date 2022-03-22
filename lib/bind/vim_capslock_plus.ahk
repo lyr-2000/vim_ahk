@@ -28,7 +28,6 @@ return                                                               ;|
 ;----------------------------------o----------------------------------o
 CapsLock::
 SetCapsLockState, AlwaysOff  
- 
 return
 ;---------------------------------------------------------------------o
 
@@ -352,9 +351,23 @@ moveToKey(key="") {
     Return 
 }
 
+
+RmToolTip:
+ToolTip,
+global findMode 
+findMode := 0
+
+return 
+
+
 capslock & f::
 global findMode
 findMode := 1
+x := %A_CaretX% + 20
+y := %A_CaretY% + 24
+ 
+ToolTip, find mode,x,y
+SetTimer, RmToolTip, -5000
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 
 return 

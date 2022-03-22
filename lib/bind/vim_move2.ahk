@@ -1,13 +1,16 @@
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("Vim_Normal"))
 RemoveToolTip:
 ToolTip
-Vim.State.SetMode("Vim_Normal")
+; Vim.State.SetMode("Vim_Normal")
 return
 
 
 f::
 Vim.State.SetMode("custom_f",0,0,0)
-ToolTip, find mode 
+x := %A_CaretX% + 14
+y := %A_CaretY% + 14
+ 
+ToolTip, find mode ,x,y
 SetTimer, RemoveToolTip, -3000
 ; Vim.Move.MoveToKey(";")
 Return 

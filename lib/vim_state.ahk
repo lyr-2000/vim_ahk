@@ -47,19 +47,31 @@
   }
 
   ClearToolTip() {
-    ToolTip
+    SetTimer, RemoveToolTip, -3000
   }
 
   SetMode(Mode="", g=0, n=0, LineCopy=-1){
 
     this.CheckValidMode(Mode)
     if (Mode == "Vim_VisualChar") {
-      ToolTip, visual mode
+      x := %A_CaretX% + 14
+      y := %A_CaretY% + 14
+ 
+      ToolTip, visual mode ,x,y
+      this.ClearToolTip()
       ; SetTimer, RemoveToolTip, -3000
     }else if (Mode == "Vim_Normal"){
-      ToolTip normal mode
-    }else {
-      ToolTip 
+      x := %A_CaretX% + 14
+      y := %A_CaretY% + 14
+      ToolTip normal mode,x,y
+      this.ClearToolTip()
+    } else if(Mode == "Insert") {
+       x := %A_CaretX% + 14
+      y := %A_CaretY% + 14
+      ToolTip, insert mode,x,y
+      this.ClearToolTip()
+    } else {
+      ToolTip
     }
 
     if(Mode != ""){
