@@ -18,6 +18,15 @@
 ; Key Bindings
 #Include %A_LineFile%\..\vim_bind.ahk
 
+
+; custon feactures
+
+ 
+#Include %A_LineFile%\..\bind\vim_capslock_plus.ahk
+#Include %A_LineFile%\..\bind\vim_move2.ahk
+
+
+
 class VimAhk{
   __About(){
     this.About.Version := "v0.11.3"

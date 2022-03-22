@@ -10,7 +10,7 @@
     , "Vim_ydc_y" , "Vim_ydc_yInner", "Vim_ydc_c", "Vim_ydc_cInner"
     , "Vim_ydc_d" , "Vim_ydc_dInner" , "Vim_VisualLine", "Vim_VisualFirst"
     , "Vim_VisualChar", "Vim_VisualLineFirst", "Vim_VisualCharInner"
-    , "Command" , "Command_w", "Command_q", "Z", "r_once", "r_repeat"]
+    , "Command" , "Command_w", "Command_q", "Z", "r_once", "r_repeat","custom_f"]
 
     this.Mode := "Insert"
     this.g := 0
@@ -94,7 +94,7 @@
   HandleEsc(){
     global Vim, VimEscNormal, vimSendEscNormal, VimLongEscNormal
     if (!VimEscNormal) {
-      Send, {Esc}
+      ; Send, {Esc}
       Return
     }
     ; The keywait waits for esc to be released. If it doesn't detect a release
@@ -105,7 +105,7 @@
     neither := !(VimLongEscNormal || LongPress)
     SetNormal :=  both or neither
     if (!SetNormal or (VimSendEscNormal && this.IsCurrentVimMode("Vim_Normal"))) {
-      Send, {Esc}
+      ; Send, {Esc}
     }
     if (SetNormal) {
       this.SetNormal()
@@ -113,7 +113,7 @@
     if (LongPress){
       ; Have to ensure the key has been released, otherwise this will get
       ; triggered again.
-      KeyWait, Esc
+      ; KeyWait, Esc
     }
   }
 

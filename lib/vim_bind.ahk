@@ -12,4 +12,10 @@
 #Include %A_LineFile%\..\bind\vim_disable.ahk
 
 ; Reset the condition
+
+
+
+
+
+
 #If

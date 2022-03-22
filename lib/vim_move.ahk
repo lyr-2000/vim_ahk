@@ -229,4 +229,53 @@
       this.Move("w", false)
     }
   }
+
+
+
+
+
+
+
+
+
+
+  MoveToKey(key="") {
+    this.Vim.State.SetMode("Vim_Normal")
+    pre := ClipboardAll
+    Clipboard = 
+  
+    Send, +{End}
+    Send ^c
+    ClipWait ;等待剪切板内容
+    line := Clipboard
+    ; MsgBox, contetis  %line[0]%
+    ;等待剪切板内容
+    
+    Clipboard := pre  ;恢复内容
+    pre =  ;释放内存
+    Send ,  {Left}
+    ;读取索引
+    ; MsgBox, %line%
+    pos := InStr(line, key,false)
+    ;find the enter key
+    ed := InStr(line, Chr(13),false)
+    ; sp := InStr(line, Chr(32),false)
+    ; if (ed<sp) {
+    ;     ed = sp 
+    ; }
+    
+    ; MsgBox, %pos%,%ed%,%line%
+    if(ed>0 and pos>=ed) {
+        ; findMode := 0
+        Return 
+    }
+    ; MsgBox, %pos%
+    i := 0
+    while (i<pos) {
+        Send, {Right}
+        i  := i+1
+    }
+    ; findMode := 0
+    Return 
+  }
 }
