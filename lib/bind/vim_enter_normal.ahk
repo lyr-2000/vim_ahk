@@ -2,6 +2,8 @@
 SetCapsLockState, AlwaysOff      
 ; esc 改为 ralt 防止冲突
 RAlt::Vim.State.HandleEsc()
+
+
 ^[::Vim.State.HandleCtrlBracket()
 
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("Insert")) and (Vim.Conf["VimJJ"]["val"] == 1)
@@ -16,9 +18,30 @@ Return
 
 #IF Vim.IsVimGroup() and ( Vim.State.IsCurrentVimMode("Vim_Normal") )
 ; capslock 设置
-; SetCapsLockState, AlwaysOff  
-LAlt::
-Vim.State.SetMode("Insert")
+; ; SetCapsLockState, AlwaysOff  
+; LAlt::
+; Vim.State.SetMode("Insert")
 
-Return
+
+
+LCtrl::
+x := %A_CaretX% + 20
+y := %A_CaretY% + 24
+ 
+ToolTip, normal mode ,x,y
+SetTimer, RmToolTip, -5000
+return 
+
+LShift::
+x := %A_CaretX% + 20
+y := %A_CaretY% + 24
+ 
+ToolTip, normal mode ,x,y
+SetTimer, RmToolTip, -5000
+return 
+
+
+
+
+
 #If

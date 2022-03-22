@@ -25,6 +25,9 @@ l::Vim.Move.Repeat("l")
 ; Home/End
 0::Vim.Move.Move("0")
 $::Vim.Move.Move("$")
+[::Vim.Move.Move("0")
+]::Vim.Move.Move("$")
+
 ^a::Vim.Move.Move("0") ; Emacs like
 ^e::Vim.Move.Move("$") ; Emacs like
 ^::Vim.Move.Move("^")
