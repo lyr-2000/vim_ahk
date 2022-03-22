@@ -1,6 +1,14 @@
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("Vim_Normal"))
+RemoveToolTip:
+ToolTip
+Vim.State.SetMode("Vim_Normal")
+return
+
+
 f::
 Vim.State.SetMode("custom_f",0,0,0)
+ToolTip, find mode 
+SetTimer, RemoveToolTip, -3000
 ; Vim.Move.MoveToKey(";")
 Return 
 

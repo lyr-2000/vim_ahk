@@ -46,8 +46,22 @@
     this.CheckMode(4, , , , 1)
   }
 
+  ClearToolTip() {
+    ToolTip
+  }
+
   SetMode(Mode="", g=0, n=0, LineCopy=-1){
+
     this.CheckValidMode(Mode)
+    if (Mode == "Vim_VisualChar") {
+      ToolTip, visual mode
+      ; SetTimer, RemoveToolTip, -3000
+    }else if (Mode == "Vim_Normal"){
+      ToolTip normal mode
+    }else {
+      ToolTip 
+    }
+
     if(Mode != ""){
       this.Mode := Mode
       If(this.IsCurrentVimMode("Insert")) and (this.Vim.Conf["VimRestoreIME"]["val"] == 1){

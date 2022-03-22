@@ -1,5 +1,6 @@
 ﻿; Visual Char/Block/Line
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("Vim_Normal"))
+; ToolTip, "visual mode"
 v::Vim.State.SetMode("Vim_VisualChar")
 ^v::
   Send, ^b

@@ -241,6 +241,7 @@
 
   MoveToKey(key="") {
     this.Vim.State.SetMode("Vim_Normal")
+    ToolTip
     pre := ClipboardAll
     Clipboard = 
   
