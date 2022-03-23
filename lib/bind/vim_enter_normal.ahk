@@ -19,8 +19,8 @@ Return
 #IF Vim.IsVimGroup() and ( Vim.State.IsCurrentVimMode("Vim_Normal") )
 ; capslock 设置
 ; ; SetCapsLockState, AlwaysOff  
-; LAlt::
-; Vim.State.SetMode("Insert")
+LAlt::
+Vim.State.SetMode("Insert")
 
 
 
