@@ -21,6 +21,7 @@ Return
 ; ; SetCapsLockState, AlwaysOff  
 LAlt::
 Vim.State.SetMode("Insert")
+Return
 
 
 
