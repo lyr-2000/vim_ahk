@@ -9,6 +9,7 @@
     if(this.Vim.State.StrIsInCurrentVimMode("Visual") or this.Vim.State.StrIsInCurrentVimMode("ydc")){
       this.shift := 1
       Send, {Shift Down}
+      return ; 这里可能有bug, 原来是没有 return的，这里 return 一下
     }
 
     if(this.Vim.State.IsCurrentVimMode("Vim_VisualLineFirst")) and (key == "k" or key == "^u" or key == "^b" or key == "g"){
@@ -17,10 +18,13 @@
       Send, {Shift Down}
       this.Up()
       this.vim.state.setmode("Vim_VisualLine")
+      
+      return  ;bugfix: visualmode
     }
 
     if(this.Vim.State.IsCurrentVimMode("Vim_VisualLineFirst")) and (key == "j" or key == "^d" or key == "^f" or key == "+g"){
       this.vim.state.setmode("Vim_VisualLine")
+      return ; buf fix visual mode
     }
 
     if(this.Vim.State.StrIsInCurrentVimMode("Vim_ydc")) and (key == "k" or key == "^u" or key == "^b" or key == "g"){
@@ -29,7 +33,9 @@
       this.Home()
       this.Down()
       Send, {Shift Down}
+      ; ToolTip, up
       this.Up()
+      return ; bug fix
     }
     if(this.Vim.State.StrIsInCurrentVimMode("Vim_ydc")) and (key == "j" or key == "^d" or key == "^f" or key == "+g"){
       this.Vim.State.LineCopy := 1
@@ -37,6 +43,7 @@
       this.Home()
       Send, {Shift Down}
       this.Down()
+      return ;bugfix
     }
   }
 
@@ -78,27 +85,34 @@
 
   Up(n=1){
     Loop, %n% {
-      if WinActive("ahk_group VimCtrlUpDownGroup"){
+      ; ToolTip, up up
+       if WinActive("ahk_group VimCtrlUpDownGroup"){
         Send ^{Up}
       } else {
         Send,{Up}
       }
+       KeyWait, Up, up
     }
+   
   }
 
   Down(n=1){
     Loop, %n% {
       if WinActive("ahk_group VimCtrlUpDownGroup"){
         Send ^{Down}
+        
       } else {
         Send,{Down}
       }
+      KeyWait, Down, up
     }
   }
 
   Move(key="", repeat=false){
+    
     if(!repeat){
       this.MoveInitialize(key)
+      
     }
 
     ; Left/Right
@@ -173,10 +187,13 @@
     ; Up/Down 1 character
     if(key == "j"){
       this.Down()
+      ; Return
     }else if(key="k"){
+      ; ToolTip, %key%
       this.Up()
     ; Page Up/Down
-    n := 10
+       n := 10
+      ;  Return
     }else if(key == "^u"){
       this.Up(10)
     }else if(key == "^d"){
