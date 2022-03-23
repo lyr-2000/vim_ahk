@@ -9,7 +9,7 @@
     if(this.Vim.State.StrIsInCurrentVimMode("Visual") or this.Vim.State.StrIsInCurrentVimMode("ydc")){
       this.shift := 1
       Send, {Shift Down}
-      return ; 这里可能有bug, 原来是没有 return的，这里 return 一下
+      ; return ; 这里可能有bug, 原来是没有 return的，这里 return 一下
     }
 
     if(this.Vim.State.IsCurrentVimMode("Vim_VisualLineFirst")) and (key == "k" or key == "^u" or key == "^b" or key == "g"){
@@ -19,12 +19,12 @@
       this.Up()
       this.vim.state.setmode("Vim_VisualLine")
       
-      return  ;bugfix: visualmode
+      ; return  ;bugfix: visualmode
     }
 
     if(this.Vim.State.IsCurrentVimMode("Vim_VisualLineFirst")) and (key == "j" or key == "^d" or key == "^f" or key == "+g"){
       this.vim.state.setmode("Vim_VisualLine")
-      return ; buf fix visual mode
+      ; return ; buf fix visual mode
     }
 
     if(this.Vim.State.StrIsInCurrentVimMode("Vim_ydc")) and (key == "k" or key == "^u" or key == "^b" or key == "g"){
@@ -35,7 +35,7 @@
       Send, {Shift Down}
       ; ToolTip, up
       this.Up()
-      return ; bug fix
+      ; return ; bug fix
     }
     if(this.Vim.State.StrIsInCurrentVimMode("Vim_ydc")) and (key == "j" or key == "^d" or key == "^f" or key == "+g"){
       this.Vim.State.LineCopy := 1
@@ -43,11 +43,12 @@
       this.Home()
       Send, {Shift Down}
       this.Down()
-      return ;bugfix
+      ; return ;bugfix
     }
   }
 
   MoveFinalize(){
+    ; ToolTip, move finalize
     Send,{Shift Up}
     ydc_y := false
     if(this.Vim.State.StrIsInCurrentVimMode("ydc_y")){
@@ -85,26 +86,27 @@
 
   Up(n=1){
     Loop, %n% {
-      ; ToolTip, up up
-       if WinActive("ahk_group VimCtrlUpDownGroup"){
-        Send ^{Up}
+     
+      if WinActive("ahk_group VimCtrlUpDownGroup"){
+        Send {ctrl}{Up}
       } else {
         Send,{Up}
       }
-       KeyWait, Up, up
+      ; keywait up, T0.3
+      ;  KeyWait, Up, up
     }
    
   }
 
   Down(n=1){
     Loop, %n% {
-      if WinActive("ahk_group VimCtrlUpDownGroup"){
-        Send ^{Down}
+     if WinActive("ahk_group VimCtrlUpDownGroup"){
+        Send {ctrl}{Down}
         
       } else {
         Send,{Down}
       }
-      KeyWait, Down, up
+      ; KeyWait, Down, up
     }
   }
 
@@ -189,10 +191,12 @@
       this.Down()
       ; Return
     }else if(key="k"){
+      
       ; ToolTip, %key%
       this.Up()
+      ; sleep, 0.01
     ; Page Up/Down
-       n := 10
+      ;  n := 10
       ;  Return
     }else if(key == "^u"){
       this.Up(10)

@@ -16,7 +16,11 @@ g::Vim.Move.Move("g")
 ; 1 character
 h::Vim.Move.Repeat("h")
 j::Vim.Move.Repeat("j")
-k::Vim.Move.Repeat("k")
+
+
+k::Vim.Move.Repeat("k") 
+
+
 l::Vim.Move.Repeat("l")
 ^h::Vim.Move.Repeat("h")
 ^j::Vim.Move.Repeat("j")

@@ -429,6 +429,13 @@ Space::moveToKey(" ")
 
 ; 禁用 ralt 键， 因为不怎么用，可以辅助 切换 vim模式,狂按 ralt不报错
 RAlt::Return
+RCtrl::
+Return
+
+RCtrl & a::^#Left
+RControl & f::^#Right
+
+
 
 
 
