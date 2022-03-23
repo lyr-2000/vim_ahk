@@ -432,10 +432,68 @@ RAlt::Return
 RCtrl::
 Return
 
-RCtrl & a::^#Left
-RControl & f::^#Right
+; RCtrl & a::^#Left
+; RControl & f::^#Right
+
+
+; SwitchIME(dwLayout){
+;     HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)
+;     ControlGetFocus,ctl,A
+;     SendMessage,0x50,0,HKL,%ctl%,A
+; }
 
 
 
+; RShift::
+; SwitchIME( 0) ; 搜狗输入法
+; Return
 
+; RemoveToolTip:
+; ToolTip
+; return
 
+IME_GET(WinTitle="")
+;-----------------------------------------------------------
+; “获得 Input Method Editors 的状态”
+;-----------------------------------------------------------
+{
+    ifEqual WinTitle,,  SetEnv,WinTitle,A
+    WinGet,hWnd,ID,%WinTitle%
+    DefaultIMEWnd := DllCall("imm32\ImmGetDefaultIMEWnd", Uint,hWnd, Uint)
+ 
+    DetectSave := A_DetectHiddenWindows
+    DetectHiddenWindows,ON
+    SendMessage 0x283, 0x005,0,,ahk_id %DefaultIMEWnd%
+    DetectHiddenWindows,%DetectSave%
+    Return ErrorLevel
+}
+
+ 
+
+; CN := chr(20013)
+; EN := chr(33521)
+
+; RShift::
+; ; 定义 rshift 键默认输入的就是英文，如果中文，也切换回英文
+; v:=IME_GET()
+; if(v=0) {
+;     Send, {shift}{shift}
+;     ;0是英文
+; }else {
+;     Send, {shift}
+; }
+
+;英文是0 直接返回
+
+; mainAction("A",CN,EN)
+; Return
+; 写代码的时候 经常会自动输入中文
+rshift & 1::
+v:=IME_Get()
+if( v=1) {
+    ;rshift 自动切回英文
+    send {shift}
+}
+Send, {!}
+
+Return
