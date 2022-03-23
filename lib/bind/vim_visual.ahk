@@ -14,6 +14,7 @@ Return
 
 #If Vim.IsVimGroup() and (Vim.State.StrIsInCurrentVimMode("Visual"))
 v::Vim.State.SetMode("Vim_Normal")
+i::Vim.State.SetMode("Insert")
 
 ; ydc
 y::

@@ -23,26 +23,44 @@ LAlt::
 Vim.State.SetMode("Insert")
 Return
 
+; 快速匹配 逗号，代码
+,::
+global findMode 
+findMode := 1
+moveToKey(",")
+Return
+`;::
+global findMode 
+findMode := 1
+moveToKey(";")
+Return
 
-
-LCtrl::
-x := %A_CaretX% + 20
-y := %A_CaretY% + 24
+; LCtrl::
+; x :X% + 20
+; y := %A_CaretY% + 24
  
-ToolTip, normal mode ,x,y
-SetTimer, RmToolTip, -5000
-return 
+; ToolTip, normal mode ,x,y
+; SetTimer, RmToolTip, -5000
+; Send {LCtrl}
+; return 
 
-LShift::
-x := %A_CaretX% + 20
-y := %A_CaretY% + 24
+; LShift::
+; x := %A_CaretX% + 20
+; y := %A_CaretY% + 24
  
-ToolTip, normal mode ,x,y
-SetTimer, RmToolTip, -5000
-return 
+; ToolTip, normal mode ,x,y
+; SetTimer, RmToolTip, -5000
+; Send {LShift}
+; return 
 
 
 
 
 
 #If
+
+
+
+
+
+

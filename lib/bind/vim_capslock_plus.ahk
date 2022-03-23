@@ -425,3 +425,10 @@ Space::moveToKey(" ")
 #If
 
 
+
+
+; 禁用 ralt 键， 因为不怎么用，可以辅助 切换 vim模式,狂按 ralt不报错
+RAlt::Return
+
+
+
