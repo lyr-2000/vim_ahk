@@ -37,9 +37,10 @@ Return
 ; 按空格 直接整个单词匹配
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("Vim_Normal"))
 $Space::
+; ToolTip, hello
 pre := ClipboardAll
 Send,^c
-ClipWait, 
+; ClipWait, 200
 copyed := Clipboard
 Clipboard := pre
 ln := StrLen(copyed)
