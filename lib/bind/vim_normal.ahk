@@ -34,8 +34,30 @@ Return
   Vim.State.SetMode("Vim_Normal")
 Return
 
+; 按空格 直接整个单词匹配
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("Vim_Normal"))
-Space::Send, {Right}
+$Space::
+pre := ClipboardAll
+Send,^c
+ClipWait, 
+copyed := Clipboard
+Clipboard := pre
+ln := StrLen(copyed)
+if (ln = 0) {
+  send ^+{Right}
+}else {
+  send {right}
+  send ^+{Right}
+}
+; tooltip, helloworld
+return 
+
+
+
+
+
+
+
 
 ; period
 .::Send, +^{Right}{BS}^v

@@ -14,18 +14,32 @@ g::Vim.Move.Move("g")
 
 #If Vim.IsVimGroup() and (Vim.State.StrIsInCurrentVimMode("Vim_"))
 ; 1 character
-h::Vim.Move.Repeat("h")
-j::Vim.Move.Repeat("j")
+$+h::Vim.Move.Repeat("h") ; bugfix visual mode
+
+$+j::Vim.Move.Repeat("j") ; bugfix visual mode
 
 
-k::Vim.Move.Repeat("k") 
+$+k::Vim.Move.Repeat("k")  ; bugfix visual mode
+
+$+l::Vim.Move.Repeat("l") ; bugfix visual mode
 
 
-l::Vim.Move.Repeat("l")
-^h::Vim.Move.Repeat("h")
-^j::Vim.Move.Repeat("j")
-^k::Vim.Move.Repeat("k")
-^l::Vim.Move.Repeat("l")
+$h::Vim.Move.Repeat("h")
+$j::Vim.Move.Repeat("j")
+
+
+$k::Vim.Move.Repeat("k") 
+
+
+$l::Vim.Move.Repeat("l")
+
+
+$^h::Vim.Move.Repeat("h")
+$^j::Vim.Move.Repeat("j")
+
+
+$^k::Vim.Move.Repeat("k")
+$^l::Vim.Move.Repeat("l")
 ; Home/End
 0::Vim.Move.Move("0")
 $::Vim.Move.Move("$")

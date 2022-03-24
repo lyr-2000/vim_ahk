@@ -16,7 +16,9 @@ Return
 v::Vim.State.SetMode("Vim_Normal")
 i::Vim.State.SetMode("Insert")
 
+$u::Return
 ; ydc
++y::
 y::
   Clipboard :=
   Send, ^c
@@ -75,5 +77,19 @@ Return
   clipboard := bak
   Vim.State.SetMode("Vim_Normal")
 Return
+
+ 
+
+; +h::Vim.Move.Repeat("h") ; bugfix visual mode
+
+; +j::Vim.Move.Repeat("j") ; bugfix visual mode
+
+
+; +k::Vim.Move.Repeat("k")  ; bugfix visual mode
+
+; +l::Vim.Move.Repeat("l") ; bugfix visual mode
+
+
+
 
 #If

@@ -5,7 +5,7 @@ ToolTip
 return
 
 
-f::
+$f::
 Vim.State.SetMode("custom_f",0,0,0)
 x := %A_CaretX% + 14
 y := %A_CaretY% + 14
@@ -14,6 +14,12 @@ ToolTip, find mode ,x,y
 SetTimer, RemoveToolTip, -3000
 ; Vim.Move.MoveToKey(";")
 Return 
+
+
+
+
+
+
 
 #If Vim.IsVimGroup() and (Vim.State.IsCurrentVimMode("custom_f"))
 a::Vim.Move.MoveToKey("a")
