@@ -50,7 +50,12 @@ if (ln = 0) {
   send {right}
   send ^+{Right}
 }
+Return
 ; tooltip, helloworld
+
+$BackSpace::
+Send, {backspace}
+Vim.State.SetMode("Insert")
 return 
 
 
