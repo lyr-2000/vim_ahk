@@ -488,15 +488,11 @@ IME_GET(WinTitle="")
 ; mainAction("A",CN,EN)
 ; Return
 ; 写代码的时候 经常会自动输入中文
-rshift & 1::
-v:=IME_Get()
-if( v=1) {
-    ;rshift 自动切回英文
-    send {shift}
-}
-Send, {!}
+; rshift & 1::
 
-Return
+; Send, {!}
+
+; Return
 
 
 
