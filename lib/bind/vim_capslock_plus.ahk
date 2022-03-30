@@ -351,8 +351,8 @@ moveToKey(key="") {
     Return 
 }
 
-
-RmToolTip:
+; 删除 tooltip
+RmToolTip_f:
 ToolTip,
 global findMode 
 findMode := 0
@@ -367,7 +367,7 @@ x := %A_CaretX% + 20
 y := %A_CaretY% + 24
  
 ToolTip, find mode,x,y
-SetTimer, RmToolTip, -5000
+SetTimer, RmToolTip_f, -5000
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 
 return 
@@ -427,26 +427,30 @@ Space::moveToKey(" ")
 
 
 
-; 禁用 ralt 键， 因为不怎么用，可以辅助 切换 vim模式,狂按 ralt不报错
+; 禁用 ralt 键， 因为不怎么用，可以辅助 切换 vim模式, lalt一个就够
 RAlt::Return
-RCtrl::
-Return
 
-; RCtrl & a::^#Left
-; RControl & f::^#Right
+RmToolTip:
+ToolTip,
+return 
+ 
+NumLock::
+x := %A_CaretX% + 20
+y := %A_CaretY% + 24
+if (GetKeyState("NumLock", "T")) {
+  ToolTip, ins mode,x,y
+  SetNumLockState, Off
+}else {
+   ToolTip, num mode,x,y
+   SetNumLockState, On
+}
+SetTimer, RmToolTip, -5000
+; MsgBox, "findmode is ; on ",%findMode% ；；;  
+return
 
 
-; SwitchIME(dwLayout){
-;     HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)
-;     ControlGetFocus,ctl,A
-;     SendMessage,0x50,0,HKL,%ctl%,A
-; }
 
 
-
-; RShift::
-; SwitchIME( 0) ; 搜狗输入法
-; Return
 
 ; RemoveToolTip:
 ; ToolTip
