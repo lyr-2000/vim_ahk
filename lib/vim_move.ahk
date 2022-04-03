@@ -174,9 +174,9 @@
         }
       }else if(key == "e"){
         if(this.shift == 1){
-          Send, +^{Right}+^{Right}+{Left}
+          Send, +^{Right}+^{Right}
         }else{
-          Send, ^{Right}^{Right}{Left}
+          Send, ^{Right}^{Right}
         }
       }else if(key == "b"){
         if(this.shift == 1){
