@@ -11,6 +11,15 @@ SetCapsLockState, AlwaysOff                                          ;|
 ;---------------------------------o-----------------------------------o
 ;                    CapsLock + ` | {CapsLock}                       ;|
 ;---------------------------------o-----------------------------------o
+RShift & CapsLock::
+GetKeyState, CapsLockState, CapsLock, T                              ;|
+if CapsLockState = D                                                 ;|
+    SetCapsLockState, AlwaysOff                                      ;|
+else                                                                 ;|
+    SetCapsLockState, AlwaysOn                                       ;|
+KeyWait, ``                                                          ;|
+return    
+
 CapsLock & `::                                                       ;|
 GetKeyState, CapsLockState, CapsLock, T                              ;|
 if CapsLockState = D                                                 ;|
