@@ -1,5 +1,5 @@
 ﻿#If Vim.IsVimGroup()
-SetCapsLockState, AlwaysOff      
+   
 ; esc 改为 ralt 防止冲突
 RAlt::Vim.State.HandleEsc()
 
@@ -17,22 +17,22 @@ Return
 
 
 #IF Vim.IsVimGroup() and ( Vim.State.IsCurrentVimMode("Vim_Normal") )
+SetCapsLockState, AlwaysOff   
 ; capslock 设置
 ; ; SetCapsLockState, AlwaysOff  
-LAlt::
+\::
+Vim.State.SetMode("Insert")
+Return
+`::
+Vim.State.SetMode("Insert")
+Return
+CapsLock::
+SetCapsLockState, AlwaysOff
 Vim.State.SetMode("Insert")
 Return
 
-; 快速匹配 逗号，代码
-,::
-global findMode 
-findMode := 1
-moveToKey(",")
-Return
-`;::
-global findMode 
-findMode := 1
-moveToKey(";")
+Tab::
+Vim.State.SetMode("Insert")
 Return
 
 ; LCtrl::
