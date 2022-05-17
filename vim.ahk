@@ -301,6 +301,13 @@ else {                                                               ;|
 }                                                                    ;|
 return  
 
+;直接跳到行尾
+CapsLock & f::
+Send, ^{End} 
+Return 
+
+
+
 ; 翻页
 ; CapsLock & -:: Send {Blind}{PgUp}
 ; CapsLock & =:: Send {Blind}{PgDn}
@@ -490,6 +497,8 @@ return
 ; Send, {!}
 
 ; Return
+
+
 
 
 
