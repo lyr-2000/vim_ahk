@@ -265,8 +265,41 @@ else {                                                               ;|
 }                                                                    ;|
 return                                                               ;|
 ;---------------------------------------------------------------------o
+CapsLock & n::                                                       ;|
+if GetKeyState("control") = 0                                        ;|
+{                                                                    ;|
+    if GetKeyState("shift") = 0                                        ;|
+        Send, {PgUp}                                                 ;|
+    else                                                             ;|
+        Send, +{PgUp}                                                ;|
+    return                                                           ;|
+}                                                                    ;|
+else {                                                               ;|
+    if GetKeyState("shift") = 0                                        ;|
+        Send, ^{PgUp}                                                ;|
+    else                                                             ;|
+        Send, +^{PgUp}                                               ;|
+    return                                                           ;|
+}                                                                    ;|
+return   
 
-
+CapsLock & m::                                                       ;|
+if GetKeyState("control") = 0                                        ;|
+{                                                                    ;|
+    if GetKeyState("shift") = 0                                        ;|
+        Send, {PgDn}                                                 ;|
+    else                                                             ;|
+        Send, +{PgDn}                                                ;|
+    return                                                           ;|
+}                                                                    ;|
+else {                                                               ;|
+    if GetKeyState("shift") = 0                                        ;|
+        Send, ^{PgDn}                                                ;|
+    else                                                             ;|
+        Send, +^{PgDn}                                               ;|
+    return                                                           ;|
+}                                                                    ;|
+return  
 
 ; 翻页
 ; CapsLock & -:: Send {Blind}{PgUp}
@@ -406,6 +439,7 @@ if (GetKeyState("NumLock", "T")) {
 SetTimer, RmToolTip, -5000
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 return
+
 
 
 
