@@ -447,6 +447,31 @@ SetTimer, RmToolTip, -5000
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 return
 
+; 设定激活窗口，切换 chrome 和 编辑器等，
+; active chrome
+RCtrl & c::
+if WinExist("ahk_exe chrome.exe")
+        WinActivate, ahk_exe chrome.exe
+else
+        Run, chrome.exe
+
+return 
+; active vscode
+RControl & v::
+if WinExist("ahk_exe code.exe")
+        WinActivate, ahk_exe code.exe 
+else
+        Run, code.exe
+
+return 
+
+RCtrl & Space::
+if winActive("ahk_exe chrome.exe")
+        WinActivate, ahk_exe code.exe 
+else if winActive("ahk_exe code.exe")
+          WinActivate, ahk_exe chrome.exe
+return  
+
 
 
 
