@@ -472,13 +472,19 @@ return
 ; else if winActive("ahk_exe code.exe")
 ;           WinActivate, ahk_exe chrome.exe
 ; return  
-
+; SetWorkingDir, %A_ScriptDir%
 fread() {
     ; MsgBox, "init"
-FileRead, switchWin, "ahk.txt"
-if (switchWin != "") {
+p := "ahk.txt"
+; MsgBox, %p%
+FileRead, sw,%p%
+; if ErrorLevel {
+;     MsgBox, "error" %ErrorLevel%
+; }
+; MsgBox, %sw%
+if (sw!= "") {
     ; MsgBox, "file not found"
-    return switchWin
+    return sw
 }
    return "ahk_exe chrome.exe|ahk_exe code.exe`nahk_exe code.exe|ahk_exe chrome.exe"
 }
@@ -489,6 +495,7 @@ if (switchWin != "") {
 global ss 
 if (ss=="") {
     ss := fread()
+
 }
 
 
@@ -497,7 +504,8 @@ for i,e in StrSplit(ss, "`n") {
     arr := strsplit(e, "|")
     l := arr[1] 
     r := arr[2]
-    if   WinActive( l )    {
+    ;( l!="" ) && ( r!="" ) &&
+    if ( l!="" ) && ( r!="" ) && ( WinActive( l ) ) && WinExist(r)   {
         WinActivate, %r%
         return
     }
@@ -506,7 +514,7 @@ for i,e in StrSplit(ss, "`n") {
 return
 
 
-#]::
+#0::
 
 ; FileOpen("FileName.txt", "w").Write("New contents")
 ; FileOpen("FileName.txt", "w").Write("New contents")
@@ -534,6 +542,7 @@ MultiLineInput(Text:="Waiting for Input") {
         fd := FileOpen("ahk.txt", "w")
         fd.Write(MLI_Edit)
         fd.Close()
+        global ss := MLI_Edit
     MLI_Cancel:
     GuiEscape:
         ReturnNow := True
@@ -552,6 +561,8 @@ MultiLineInput(Text:="Waiting for Input") {
 #If winActive("ahk_exe chrome.exe")
 lctrl & [:: Send,^+{Tab}
 lctrl & ]:: Send,^{Tab}
+lctrl & q:: Send,^w
+
 
 return 
 
