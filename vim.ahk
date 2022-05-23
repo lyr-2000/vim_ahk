@@ -28,7 +28,7 @@ SetCapsLockState, AlwaysOff                                          ;|
 ; KeyWait, ``                                                          ;|
 ; return    
 
-CapsLock & RCtrl::                                                       ;|
+RCtrl & CapsLock::                                                       ;|
 GetKeyState, CapsLockState, CapsLock, T                              ;|
 if CapsLockState = D                                                 ;|
     SetCapsLockState, AlwaysOff                                      ;|
@@ -37,7 +37,7 @@ else                                                                 ;|
 KeyWait, ``                                                          ;|
 return    
 ; 充分发挥左右手指优势
-CapsLock & RAlt::
+RAlt & CapsLock::
 GetKeyState, CapsLockState, CapsLock, T                              ;|
 if CapsLockState = D                                                 ;|
     SetCapsLockState, AlwaysOff                                      ;|
@@ -449,32 +449,75 @@ return
 
 ; 设定激活窗口，切换 chrome 和 编辑器等，
 ; active chrome
-RCtrl & c::
-if WinExist("ahk_exe chrome.exe")
-        WinActivate, ahk_exe chrome.exe
-else
-        Run, chrome.exe
+; RCtrl & c::
+; if WinExist("ahk_exe chrome.exe")
+;         WinActivate, ahk_exe chrome.exe
+; else
+;         Run, chrome.exe
 
-return 
-; active vscode
-RControl & v::
-if WinExist("ahk_exe code.exe")
-        WinActivate, ahk_exe code.exe 
-else
-        Run, code.exe
+; return 
+; ; active vscode
+; RControl & v::
+; if WinExist("ahk_exe code.exe")
+;         WinActivate, ahk_exe code.exe 
+; else
+;         ; Run, code.exe
+;         ToolTip, please open vscode 
 
-return 
+; return 
 
-RCtrl & Space::
+; RCtrl & Space::
+; if winActive("ahk_exe chrome.exe")
+;         WinActivate, ahk_exe code.exe 
+; else if winActive("ahk_exe code.exe")
+;           WinActivate, ahk_exe chrome.exe
+; return  
+
+
+#[::
 if winActive("ahk_exe chrome.exe")
         WinActivate, ahk_exe code.exe 
 else if winActive("ahk_exe code.exe")
           WinActivate, ahk_exe chrome.exe
 return  
 
+#]::
+MsgBox, %A_ScriptDir%\ahk_.txt
+; IniRead,output_a,%A_ScriptDir%\ahk_.ini ;读取配置的时候忽略数据名称key，则会返回所有数据名称，返回的是字符串，需要分割。
+; ; 
+; IniWrite, Value, Filename, Section, Key
+; Gui, New
+; Gui, Add, Text,, Username
+; Gui, Add, Edit, vUsername
+; Gui, Add, Text,, Password
+; Gui, Add, Edit, Password vPassword
+; Gui, Add, Button, Default gOK, OK
+; Gui, Show
+; return
+; OK:
+; Gui, Submit
+; MsgBox %Username% and %Password%
+return
+ 
 
 
 
+
+
+
+
+
+#If winActive("ahk_exe chrome.exe")
+lctrl & [:: Send,^+{Tab}
+lctrl & ]:: Send,^{Tab}
+
+return 
+
+#if 
+
+
+
+     
 
 
 ; RemoveToolTip:
