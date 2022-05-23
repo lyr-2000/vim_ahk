@@ -447,115 +447,9 @@ SetTimer, RmToolTip, -5000
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 return
 
-; 设定激活窗口，切换 chrome 和 编辑器等，
-; active chrome
-; RCtrl & c::
-; if WinExist("ahk_exe chrome.exe")
-;         WinActivate, ahk_exe chrome.exe
-; else
-;         Run, chrome.exe
-
-; return 
-; ; active vscode
-; RControl & v::
-; if WinExist("ahk_exe code.exe")
-;         WinActivate, ahk_exe code.exe 
-; else
-;         ; Run, code.exe
-;         ToolTip, please open vscode 
-
-; return 
-
-; RCtrl & Space::
-; if winActive("ahk_exe chrome.exe")
-;         WinActivate, ahk_exe code.exe 
-; else if winActive("ahk_exe code.exe")
-;           WinActivate, ahk_exe chrome.exe
-; return  
-; SetWorkingDir, %A_ScriptDir%
-fread() {
-    ; MsgBox, "init"
-p := "ahk.txt"
-; MsgBox, %p%
-FileRead, sw,%p%
-; if ErrorLevel {
-;     MsgBox, "error" %ErrorLevel%
-; }
-; MsgBox, %sw%
-if (sw!= "") {
-    ; MsgBox, "file not found"
-    return sw
-}
-   return "ahk_exe chrome.exe|ahk_exe code.exe`nahk_exe code.exe|ahk_exe chrome.exe"
-}
-; ss := fread()
-
-#[::
-
-global ss 
-if (ss=="") {
-    ss := fread()
-
-}
-
-
-for i,e in StrSplit(ss, "`n") {
-    ; MsgBox, %i%,%e%
-    arr := strsplit(e, "|")
-    l := arr[1] 
-    r := arr[2]
-    ;( l!="" ) && ( r!="" ) &&
-    if ( l!="" ) && ( r!="" ) && ( WinActive( l ) ) && WinExist(r)   {
-        WinActivate, %r%
-        return
-    }
-}
-
-return
-
-
-#0::
-
-; FileOpen("FileName.txt", "w").Write("New contents")
-; FileOpen("FileName.txt", "w").Write("New contents")
-; FileOpen("FileName.txt", "w").Write("New contents")
-; FileOpen("FileName.txt", "w")Close()
-; MsgBox, %A_ScriptDir%\ahk_.txt
-MultiLineInput("输入切换程序")
-; MsgBox % MultiLineInput("输入要切换的窗口")
-return
- 
-MultiLineInput(Text:="Waiting for Input") {
-    pre := fread()
-    Global MLI_Edit
-   
-    Gui, Add, Edit, vMLI_Edit x2 y2 w396 r4
-    Gui, Add, Button, gMLI_OK x1 y63 w199 h30, &OK
-    Gui, Add, Button, gMLI_Cancel x200 y63 w199 h30, &Cancel
-
-     GuiControl,,MLI_Edit,%pre%
-    Gui, Show, h94 w400, %Text%
-    Goto, MLI_Wait
-    MLI_OK:
-        GuiControlGet, MLI_Edit
-        ; file write
-        fd := FileOpen("ahk.txt", "w")
-        fd.Write(MLI_Edit)
-        fd.Close()
-        global ss := MLI_Edit
-    MLI_Cancel:
-    GuiEscape:
-        ReturnNow := True
-    MLI_Wait:
-        While (!ReturnNow)
-            Sleep, 100
-    Gui, Destroy
-    Return %MLI_Edit%
-}
-
-
-
-
+; use win+ [ or ] => switch windows in your taskbars
+#]::Send !{ESC}
+#[::Send !+{ESC}
 
 
 #If winActive("ahk_exe chrome.exe")
@@ -626,3 +520,111 @@ return
 
 
 
+; #[::
+
+; global ss 
+; if (ss=="") {
+;     ss := fread()
+
+; }
+
+
+; for i,e in StrSplit(ss, "`n") {
+;     ; MsgBox, %i%,%e%
+;     arr := strsplit(e, "|")
+;     l := arr[1] 
+;     r := arr[2]
+;     ;( l!="" ) && ( r!="" ) &&
+;     if ( l!="" ) && ( r!="" ) && ( WinActive( l ) ) && WinExist(r)   {
+;         WinActivate, %r%
+;         return
+;     }
+; }
+
+; return
+
+
+; #0::
+
+; ; FileOpen("FileName.txt", "w").Write("New contents")
+; ; FileOpen("FileName.txt", "w").Write("New contents")
+; ; FileOpen("FileName.txt", "w").Write("New contents")
+; ; FileOpen("FileName.txt", "w")Close()
+; ; MsgBox, %A_ScriptDir%\ahk_.txt
+; MultiLineInput("输入切换程序")
+; ; MsgBox % MultiLineInput("输入要切换的窗口")
+; return
+ 
+; MultiLineInput(Text:="Waiting for Input") {
+;     pre := fread()
+;     Global MLI_Edit
+   
+;     Gui, Add, Edit, vMLI_Edit x2 y2 w396 r4
+;     Gui, Add, Button, gMLI_OK x1 y63 w199 h30, &OK
+;     Gui, Add, Button, gMLI_Cancel x200 y63 w199 h30, &Cancel
+
+;      GuiControl,,MLI_Edit,%pre%
+;     Gui, Show, h94 w400, %Text%
+;     Goto, MLI_Wait
+;     MLI_OK:
+;         GuiControlGet, MLI_Edit
+;         ; file write
+;         fd := FileOpen("ahk.txt", "w")
+;         fd.Write(MLI_Edit)
+;         fd.Close()
+;         global ss := MLI_Edit
+;     MLI_Cancel:
+;     GuiEscape:
+;         ReturnNow := True
+;     MLI_Wait:
+;         While (!ReturnNow)
+;             Sleep, 100
+;     Gui, Destroy
+;     Return %MLI_Edit%
+; }
+
+
+
+
+
+; 设定激活窗口，切换 chrome 和 编辑器等，
+; active chrome
+; RCtrl & c::
+; if WinExist("ahk_exe chrome.exe")
+;         WinActivate, ahk_exe chrome.exe
+; else
+;         Run, chrome.exe
+
+; return 
+; ; active vscode
+; RControl & v::
+; if WinExist("ahk_exe code.exe")
+;         WinActivate, ahk_exe code.exe 
+; else
+;         ; Run, code.exe
+;         ToolTip, please open vscode 
+
+; return 
+
+; RCtrl & Space::
+; if winActive("ahk_exe chrome.exe")
+;         WinActivate, ahk_exe code.exe 
+; else if winActive("ahk_exe code.exe")
+;           WinActivate, ahk_exe chrome.exe
+; return  
+; SetWorkingDir, %A_ScriptDir%
+; fread() {
+;     ; MsgBox, "init"
+; p := "ahk.txt"
+; ; MsgBox, %p%
+; FileRead, sw,%p%
+; ; if ErrorLevel {
+; ;     MsgBox, "error" %ErrorLevel%
+; ; }
+; ; MsgBox, %sw%
+; if (sw!= "") {
+;     ; MsgBox, "file not found"
+;     return sw
+; }
+;    return "ahk_exe chrome.exe|ahk_exe code.exe`nahk_exe code.exe|ahk_exe chrome.exe"
+; }
