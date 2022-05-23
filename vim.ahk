@@ -473,34 +473,76 @@ return
 ;           WinActivate, ahk_exe chrome.exe
 ; return  
 
+fread() {
+    ; MsgBox, "init"
+FileRead, switchWin, "ahk.txt"
+if (switchWin != "") {
+    ; MsgBox, "file not found"
+    return switchWin
+}
+   return "ahk_exe chrome.exe|ahk_exe code.exe`nahk_exe code.exe|ahk_exe chrome.exe"
+}
+; ss := fread()
 
 #[::
-if winActive("ahk_exe chrome.exe")
-        WinActivate, ahk_exe code.exe 
-else if winActive("ahk_exe code.exe")
-          WinActivate, ahk_exe chrome.exe
-return  
+
+global ss 
+if (ss=="") {
+    ss := fread()
+}
+
+
+for i,e in StrSplit(ss, "`n") {
+    ; MsgBox, %i%,%e%
+    arr := strsplit(e, "|")
+    l := arr[1] 
+    r := arr[2]
+    if   WinActive( l )    {
+        WinActivate, %r%
+        return
+    }
+}
+
+return
+
 
 #]::
-MsgBox, %A_ScriptDir%\ahk_.txt
-; IniRead,output_a,%A_ScriptDir%\ahk_.ini ;读取配置的时候忽略数据名称key，则会返回所有数据名称，返回的是字符串，需要分割。
-; ; 
-; IniWrite, Value, Filename, Section, Key
-; Gui, New
-; Gui, Add, Text,, Username
-; Gui, Add, Edit, vUsername
-; Gui, Add, Text,, Password
-; Gui, Add, Edit, Password vPassword
-; Gui, Add, Button, Default gOK, OK
-; Gui, Show
-; return
-; OK:
-; Gui, Submit
-; MsgBox %Username% and %Password%
+
+; FileOpen("FileName.txt", "w").Write("New contents")
+; FileOpen("FileName.txt", "w").Write("New contents")
+; FileOpen("FileName.txt", "w").Write("New contents")
+; FileOpen("FileName.txt", "w")Close()
+; MsgBox, %A_ScriptDir%\ahk_.txt
+MultiLineInput("输入切换程序")
+; MsgBox % MultiLineInput("输入要切换的窗口")
 return
  
+MultiLineInput(Text:="Waiting for Input") {
+    pre := fread()
+    Global MLI_Edit
+   
+    Gui, Add, Edit, vMLI_Edit x2 y2 w396 r4
+    Gui, Add, Button, gMLI_OK x1 y63 w199 h30, &OK
+    Gui, Add, Button, gMLI_Cancel x200 y63 w199 h30, &Cancel
 
-
+     GuiControl,,MLI_Edit,%pre%
+    Gui, Show, h94 w400, %Text%
+    Goto, MLI_Wait
+    MLI_OK:
+        GuiControlGet, MLI_Edit
+        ; file write
+        fd := FileOpen("ahk.txt", "w")
+        fd.Write(MLI_Edit)
+        fd.Close()
+    MLI_Cancel:
+    GuiEscape:
+        ReturnNow := True
+    MLI_Wait:
+        While (!ReturnNow)
+            Sleep, 100
+    Gui, Destroy
+    Return %MLI_Edit%
+}
 
 
 

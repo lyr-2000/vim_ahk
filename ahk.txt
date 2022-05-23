@@ -1,0 +1,2 @@
+ahk_exe chrome.exe|ahk_exe code.exe
+ahk_exe code.exe|ahk_exe chrome.exe
