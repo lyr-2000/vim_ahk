@@ -447,7 +447,7 @@ SetTimer, RmToolTip, -5000
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 return
 
-; use win+ [ or ] => switch windows in your taskbars
+; use win+ [ or ] => switch windows in your taskbars, windows 默认 alt + esc 比较难按，这里改一下位置
 #]::Send !{ESC}
 #[::Send !+{ESC}
 
