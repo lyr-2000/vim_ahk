@@ -428,7 +428,7 @@ CapsLock & x:: Send {Delete}
 
 ; 禁用 ralt 键， 因为不怎么用，可以辅助 切换 vim模式, lalt一个就够
 ; RAlt::Return
-
+; remove tooltips
 RmToolTip:
 ToolTip,
 return 
@@ -450,6 +450,17 @@ return
 ; use win+ [ or ] => switch windows in your taskbars, windows 默认 alt + esc 比较难按，这里改一下位置
 #]::Send !{ESC}
 #[::Send !+{ESC}
+
+; toggle window tops
+#NumpadPgup:: 
+; WinGetActiveTitle, WinTitle
+; MsgBox, %WinTitle%
+Winset, Alwaysontop, toggle, A
+ToolTip, toggle tops
+SetTimer, RmToolTip, -3500
+return
+
+
 
 
 #If winActive("ahk_exe chrome.exe")
