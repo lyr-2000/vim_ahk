@@ -492,6 +492,13 @@ return
 CapsLock:: Send ,{Esc}
 #if 
 
+#if winActive("ahk_exe goland64.exe")
+CapsLock:: Send ,{ESC}
+#if  
+
+#if winActive("ahk_exe idea64.exe")
+CapsLock:: Send ,{ESC}
+#if  
 
 
  
