@@ -487,6 +487,12 @@ return
 #if 
 
 
+;  直接 capslock 代替 esc
+#if WinActive("ahk_exe code.exe")
+CapsLock:: Send ,{Esc}
+#if 
+
+
 
  
 
