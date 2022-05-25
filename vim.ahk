@@ -461,6 +461,19 @@ SetTimer, RmToolTip, -3500
 return
 
 
+; winkeys,切换虚拟桌面，简化按键
+#f10::Send, ^#d
+#f11::Send, ^#{Left}
+#f12::Send,^#{Right}
+#ESC::Send,^#{f4}
+
+
+
+
+
+
+
+
 
 
 #If winActive("ahk_exe chrome.exe")
@@ -475,7 +488,7 @@ return
 
 
 
-     
+ 
 
 
 ; RemoveToolTip:
