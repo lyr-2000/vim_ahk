@@ -512,7 +512,8 @@ CapsLock:: Send ,{ESC}
 #if  
 
 
- 
+
+#Include, %A_ScriptDir%\plugin.ahk
 
 
 ; RemoveToolTip:
@@ -676,3 +677,6 @@ CapsLock:: Send ,{ESC}
 ; }
 ;    return "ahk_exe chrome.exe|ahk_exe code.exe`nahk_exe code.exe|ahk_exe chrome.exe"
 ; }
+
+
+
