@@ -61,6 +61,17 @@ SetCapsLockState, AlwaysOff
 return
 ;---------------------------------------------------------------------o
 
+CapsLock & u::
+
+Send ,^{BackSpace}
+return 
+
+CapsLock & i::
+Send ,{BackSpace}
+return 
+CapsLock & y::
+Send, +{Left}
+return 
 ;=====================================================================o
 ;                    CapsLock Direction Navigator                    ;|
 ;-----------------------------------o---------------------------------o
