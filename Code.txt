@@ -1,3 +1,31 @@
  这是 vscode的 弹框提示
 
  
+
+
+CapsLock & f11::
+;  WinGet, Active_ID, ID, A
+; WinGet, Active_Process, ProcessName, ahk_id %Active_ID%
+; MsgBox, %ProcessName%
+WinGet, OutputVar, ProcessName, A
+SplitPath, OutputVar,,,, OutNameNoExt
+Msgbox % OutNameNoExt
+Return
+
+; 输入 caps f12 ，就可以读取文件 并且弹框显示，特别适合记录一些软件使用笔记，比如记录快捷键的用法等 
+CapsLock & f12::
+ WinGet, OutputVar, ProcessName, A 
+ SplitPath, OutputVar,,,, OutNameNoExt
+;  Msgbox % OutNameNoExt
+ x := OutNameNoExt ".txt"
+;  MsgBox, %x%
+ FileEncoding, UTF-8
+ FileRead,sw,%x%
+;  MsgBox, %sw%
+
+CustomColor = 220000  ; Can be any RGB color (it will be made transparent below). 
+Gui, +AlwaysOnTop +LastFound +Owner  ; +Owner prevents a taskbar button from appearing. 
+Gui, Color, %CustomColor% 
+Gui, Font, s18
+Gui, Add, Text, cLime, %sw%
+ 
