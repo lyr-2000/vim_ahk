@@ -1,5 +1,8 @@
 #Include, %A_ScriptDir%\libs\msgbox2.ahk
 
+#Include, %A_SCriptDir%\number.ahk
+
+
 CapsLock & f11::
 ;  WinGet, Active_ID, ID, A
 ; WinGet, Active_Process, ProcessName, ahk_id %Active_ID%
