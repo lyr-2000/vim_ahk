@@ -67,8 +67,16 @@ w::send ^{Right}
 b::send ^{Left}
 e::send ^{Right}
 g::toggleAmode(2,"vim")
+; i::toggleAmode(2,"vim")
 f::PgUp 
 d::PgDn
+n::send ^{BackSpace}
+m::BackSpace 
+u::send +{left}
+i::send +{right}
+o::Home
+p::End
+
 return 
 #if  
 

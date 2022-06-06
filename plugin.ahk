@@ -1,6 +1,6 @@
 #Include, %A_ScriptDir%\libs\msgbox2.ahk
 
-#Include, %A_SCriptDir%\number.ahk
+#Include, %A_SCriptDir%\mode2.ahk
 
 
 CapsLock & f11::
