@@ -414,13 +414,13 @@ return
 ; https://www.zhihu.com/question/303850876/answer/1421313587
 ;  直接 capslock 代替 esc
 #if WinActive("ahk_exe code.exe")
-~CapsLock:: 
+CapsLock:: 
 Send ,{Esc}
 Send, ^{F8}
 Send, {Shift}
 return
 ; 搜狗输入法 记得设置为 ctrl + f8 切到输入法
-~Esc::
+Esc::
     Send, ^{F8}
     Send, {Shift}
 return
