@@ -421,6 +421,7 @@ Send, {Shift}
 return
 ; 搜狗输入法 记得设置为 ctrl + f8 切到输入法
 Esc::
+    send, {ESC}
     Send, ^{F8}
     Send, {Shift}
 return
