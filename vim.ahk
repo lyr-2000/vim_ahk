@@ -411,10 +411,20 @@ return
 
 #if 
 
-
+; https://www.zhihu.com/question/303850876/answer/1421313587
 ;  直接 capslock 代替 esc
 #if WinActive("ahk_exe code.exe")
-CapsLock:: Send ,{Esc}
+~CapsLock:: 
+Send ,{Esc}
+Send, ^{F8}
+Send, {Shift}
+return
+; 搜狗输入法 记得设置为 ctrl + f8 切到输入法
+~Esc::
+    Send, ^{F8}
+    Send, {Shift}
+return
+
 #if 
 
 #if winActive("ahk_exe goland64.exe")
@@ -429,3 +439,31 @@ CapsLock:: Send ,{ESC}
 
 #Include, %A_ScriptDir%\plugin.ahk
 
+
+
+#if !WinActive("ahk_exe VirtualBoxVM.exe") &&!WinActive("ahk_exe VirtualBox.exe")
+ 
+NumLock::
+x := %A_CaretX% + 20
+y := %A_CaretY% + 24
+if (GetKeyState("NumLock", "T")) {
+  ToolTip, ins mode,x,y ; insert mode 提示
+  SetNumLockState, Off
+}else {
+   ToolTip, num mode,x,y ;num mode 提示
+   SetNumLockState, On
+}
+SetTimer, RmToolTip, -5000
+; MsgBox, "findmode is ; on ",%findMode% ；；;  
+return
+
+#if
+
+
+
+
+
+
+
+;  useasfair
+ 
