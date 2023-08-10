@@ -368,7 +368,7 @@ if (GetKeyState("NumLock", "T")) {
    ToolTip, num mode,x,y ;num mode 提示
    SetNumLockState, On
 }
-SetTimer, RmToolTip, -5000
+SetTimer, RmToolTip, 420
 ; MsgBox, "findmode is ; on ",%findMode% ；；;  
 return
 
@@ -376,13 +376,19 @@ return
 #]::Send !{ESC}
 #[::Send !+{ESC}
 
-; toggle window tops
+;窗口置顶
 #NumpadPgup:: 
-; WinGetActiveTitle, WinTitle
-; MsgBox, %WinTitle%
-Winset, Alwaysontop, toggle, A
-ToolTip, toggle tops
-SetTimer, RmToolTip, -3500
+WinGet, ExStyle, ExStyle, A
+if (ExStyle & 0x8) {
+    ToolTip, 取消置顶
+    Winset, Alwaysontop, Off , A
+    SetTimer, RmToolTip, 420
+
+} else {
+
+    Winset, Alwaysontop, , A
+ TrayTip, Window Notification, The window  set as "always on top", 3
+}
 return
 
 
@@ -415,25 +421,45 @@ return
 ;  直接 capslock 代替 esc
 #if WinActive("ahk_exe code.exe")
 CapsLock:: 
+GetKeyState, CapsLockState, CapsLock, T                              ;|
+; bugfix: 检测大写状态自动关闭
+if CapsLockState = D                                                 ;|
+    SetCapsLockState, AlwaysOff                                      ;|
+; vim esc
 Send ,{Esc}
+; 管理输入法 > 将搜狗设置为默认中文输入法 > 搜狗输入法中文自动切换英文 > 下面切shift 自动转英文
 Send, ^{F8}
+
 Send, {Shift}
 return
+
+
 ; 搜狗输入法 记得设置为 ctrl + f8 切到输入法
 Esc::
     send, {ESC}
     Send, ^{F8}
     Send, {Shift}
 return
-
 #if 
 
+
+
+
 #if winActive("ahk_exe goland64.exe")
-CapsLock:: Send ,{ESC}
+
+CapsLock::
+Send ,{ESC}
+
+return 
 #if  
 
 #if winActive("ahk_exe idea64.exe")
-CapsLock:: Send ,{ESC}
+CapsLock:: 
+if CapsLockState = D                                                 ;|
+    SetCapsLockState, AlwaysOff                                      ;|
+Send ,{ESC}
+return 
+
 #if  
 
 
