@@ -428,17 +428,17 @@ if CapsLockState = D                                                 ;|
 ; vim esc
 Send ,{Esc}
 ; 管理输入法 > 将搜狗设置为默认中文输入法 > 搜狗输入法中文自动切换英文 > 下面切shift 自动转英文
-Send, ^{F8}
+; Send, ^{F8}
 
-Send, {Shift}
+; Send, {Shift}
 return
 
 
 ; 搜狗输入法 记得设置为 ctrl + f8 切到输入法
-Esc::
-    send, {ESC}
-    Send, ^{F8}
-    Send, {Shift}
+; Esc::
+;     send, {ESC}
+;     Send, ^{F8}
+;     Send, {Shift}
 return
 #if 
 
